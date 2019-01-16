@@ -1,0 +1,157 @@
+//////////////////////////////////////////////
+// Hammer.js Swipe menus
+//////////////////////////////////////////////
+.sliding-menu {
+    @include fullscreen;
+    overflow: hidden;
+    background:$main_color;
+}
+
+.transition {
+    
+}
+
+.menu-content {
+    @include transform(translate3d(0, 0, 0));
+    @include transition-duration($menu-animation-speed);
+    @include fullscreen;
+    // Must be fixed so slides don't conflict in Firefox
+    position: fixed;
+    background: $main_color;
+    z-index: $z-index-menu-content;
+}
+
+//////////////////////////////////////////////
+// Left menu
+//////////////////////////////////////////////
+.left-menu{
+    @include scroll-vertical();
+    @include box-sizing();
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: $left-menu-width;
+    z-index: $z-index-left-menu;
+    background: $left-menu-background;
+    color: $menu-text-color;
+    a{
+        color: $menu-text-color;
+    }
+    li i{
+        font-size:$menu-font-size + 4;
+        float:left;
+        margin:-1px 10px -3px 0;
+    }
+    .menu {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        font-size:$menu-font-size;
+        border-top: 1px solid #202427;
+        li {
+            position: relative;
+            margin: 0;
+            padding: 0;
+            border-bottom: 1px solid #202427;
+            a, .a{
+                text-decoration: none;
+                display: block;
+                margin: 0;
+                padding: 14px 10px;
+                line-height: 20px;
+                cursor: pointer;
+                font-weight: 300;
+                &:focus{
+                    background: $left-menu-background-focus;
+                }
+            }
+            &.active a, &.active .a {
+                background: $left-menu-background-active;
+                &:focus{
+                    background: $left-menu-background-focus;
+                }
+            }
+            .count{
+                position: absolute;
+                top: 50%;
+                right: 10px;
+                margin-top: -10px;
+                z-index: 20;
+            }
+        }
+    }
+}
+
+.menu-open{
+    .menu-content{
+        section{
+            pointer-events: none;
+        }
+    }
+}
+
+////////////////////////////////////////////////
+// Fake shadows to replace css3 shadow due to performance issues
+////////////////////////////////////////////////
+#f-left-shadow, #f-right-shadow{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 10px;
+    background-repeat: repeat-y;
+    background-position: top left;
+    background-color: transparent; 
+}
+#f-left-shadow{background-image: url("#{$images-path}shadow-left.png");left: -10px}
+#f-right-shadow{background-image: url("#{$images-path}shadow-right.png");right: -10px}
+
+
+// Show active menu status when page is reloaded
+.page-today .menu-today{background:$left-menu-background-active}
+.page-inbox .menu-inbox{background:$left-menu-background-active}
+.page-agenda .menu-agenda{background:$left-menu-background-active}
+.page-past .menu-past{background:$left-menu-background-active}
+.page-availability .menu-availability{background:$left-menu-background-active}
+.page-activity .menu-activity{background:$left-menu-background-active}
+.page-social .menu-social{background:$left-menu-background-active}
+.page-account .menu-accdetails{background:$left-menu-background-active}
+
+.resource-thumb{
+    position: relative;
+    padding: 20px 10px 10px 94px;
+    min-height: 104px;
+    @include box-sizing();
+    .sked-thumbnail{
+        @include sked-thumbnail-size(64px);
+        position: absolute;
+        top: 20px;
+        left: 20px;
+    }
+    p{
+        margin:0 0 5px 0;
+        display: block;
+    }
+    .title{font-size: 16px}
+    .company{color: #c5e5fb;font-size: 9px}
+}
+
+.skedulourl{
+    padding: $content-padding 0;
+    display: block;
+    width: $left-menu-width;
+    text-align: center;
+    color: #787878;
+    font-size: 10px;
+}
+#skedulourl{
+    padding:2px 5px;
+    @include border-radius(3px);
+    margin: 3px 0;
+    line-height: 1;
+    display: inline-block;
+    &.custom{
+        background: $color_green;
+        color: #fff;
+    }
+}

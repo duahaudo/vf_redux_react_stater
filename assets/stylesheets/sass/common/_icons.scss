@@ -1,0 +1,79 @@
+///////////////////////////////////////////
+// Icons
+// IMPORTANT! include this file always after skedicons.less
+///////////////////////////////////////////
+
+/////////////////////////////////////////
+// Stacked Icons
+/////////////////////////////////////////
+.skedicon_lg {
+    font-size: 1.33333333em;
+    line-height: 0.75em;
+    vertical-align: -15%;
+}
+.skedicon_size_2x {
+    font-size: 2em;
+}
+.skedicon_size_3x {
+    font-size: 3em;
+}
+.skedicon_size_4x {
+    font-size: 4em;
+}
+.skedicon_size_5x {
+    font-size: 5em;
+}
+
+
+.skedicon_stack{
+    position: relative;
+    display: inline-block;
+    width: 2em;
+    height: 2em;
+    line-height: 2em;
+    vertical-align: middle;
+    @include box-sizing();
+}
+.skedicon_stack_1x, .skedicon_stack_2x {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    display: inline-block;
+    line-height: inherit;
+    text-rendering: auto;
+    @include box-sizing();
+}
+.skedicon_stack_1x {
+    
+}
+.skedicon_stack_2x {
+    font-size:2em;
+}
+
+// Spinner
+.icon-spin {
+    display: inline-block;
+    @include animation(spin, 2s, infinite, linear);
+}
+
+@-ms-keyframes spin {
+    from { -ms-transform: rotate(0deg); }
+    to { -ms-transform: rotate(360deg); }
+}
+@-moz-keyframes spin {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+    from {
+            transform:rotate(0deg);
+    }
+    to {
+            transform:rotate(360deg);
+    }
+}

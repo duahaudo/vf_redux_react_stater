@@ -1,0 +1,556 @@
+a {
+    color: $link-color;
+}
+
+.content-padded,
+.content-padded-2x{
+    width: 100%;
+    @include box-sizing();
+    @include clearfix();
+}
+.content-padded {
+    padding: $content-padding;
+}
+.content-padded-2x{
+    padding: $content-padding * 2;
+
+}
+
+// WIP content padded
+
+// No results found on ng:repears
+.no-results {
+    text-align: center !important;
+    color: #cecece;
+    font-size: 17.5px;
+    padding: 10px 0;
+    min-height: inherit;
+}
+
+.highlight{position: absolute;top: 0px;left: 0px;width: 100%;height: 100%;background: #FFED77;display: block;}
+
+// Chevron
+.chevron {
+    display: block;
+    height: 20px;
+}
+
+/* Base styles for both 1/2's of the chevron */
+.chevron:before,
+.chevron:after {
+    position: relative;
+    display: block;
+    width: 8px;
+    height: 2px;
+    background-color: #696969;
+    content: '';
+}
+
+/* Position and rotate respective 1/2's of the chevron */
+.chevron:before {
+    top: 6px;
+    @include transform(rotate(45deg));
+}
+.chevron:after {
+    top: 9px;
+    @include transform(rotate(-45deg));
+}
+
+// Counts
+.count,
+[class^="count-"],
+[class*=" count-"]{
+    display: inline-block;
+    padding: 2px 5px;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 13px;
+    color: #fff;
+    background-color: rgba(0, 0, 0, .3);
+    @include border-radius();
+}
+
+.count:empty,
+[class^="count-"]:empty,
+[class*=" count-"]:empty{
+  display: none;
+}
+
+/* Main count  */
+.count-blue {
+    background: lighten($color_blue, 40%);
+    color: $color_blue;
+}
+
+/* Positive count  */
+.count-green {
+    background: lighten($color_green, 40%);
+    color: $color_green;
+}
+
+/* Negative count  */
+.count-red {
+    background: lighten($color_red, 40%);
+    color: $color_red;
+}
+
+// Top right position of a count inside any button
+button [class*="count"]{
+    position: absolute;
+    top: 0;
+    right: 2px;
+    padding:2px;
+}
+
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+// Custom
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+
+.widget-header{
+    width: 100%;
+    padding: 0 10px;
+    height: $page-header-height;
+    background: $dark_color;
+    color:#fff;
+    position: relative;
+    z-index: 5;
+    @include box-sizing();
+    .btn{
+        top: 50%;
+        margin-top: -15px;
+        line-height:20px;
+    }
+    &.transparent{
+        background: transparent;
+        border: none;
+    }
+}
+.widget-title{
+    font-weight: bold;
+    line-height: 50px;
+    height: 50px;
+    display: inline-block;
+    position: relative;
+}
+.widget-save-bar{
+    position: fixed;
+    padding:$content-padding;
+    background: #fff;
+    z-index: 999;
+    text-align: center;
+    top: $page-header-height;
+    right: 0;
+    left: 0;
+    border-bottom: 1px solid $form_element_border_color;
+    @include box-sizing();
+}
+
+.save-buttons{
+    width: 100%;
+    background: #fff;
+    padding:$content-padding;
+    @include box-sizing();
+}
+
+// Input groups
+.input-group-icon{
+    position: absolute;
+    top: 0;
+    text-align:center;
+    width:40px;
+    i{
+        line-height:40px;
+        font-size:30px;
+    }
+}
+.input-group {
+    display: block;
+    position: relative;
+    width: 100%;
+    padding: 0;
+    @include clearfix();
+    @include box-sizing();
+    &.addon-icon-left{
+        padding-left: 40px;
+        .input-group-icon{left: 0}
+    }
+    &.addon-icon-right{
+        padding-right: 40px;
+        .input-group-icon{right: 0}
+    }
+}
+
+// Tablet page with side navs
+$panel_left_width: 240px;
+$panel_right_width: 270px;
+.content-panel{
+    position: absolute;
+    top: 50px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 0;
+    @include box-sizing();
+    &.hasLeftPanel{padding-left: $panel_left_width;}
+    &.hasRightPanel{padding-right: $panel_right_width}
+    .sidepanel{
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        border-color: $form_element_border_color;
+        border-style: solid;
+        @include box-sizing();
+        @include scroll-vertical();
+        .user-thumbnail{width: 30px;height: 30px}
+        .itemRight{text-transform: capitalize;}
+        .list:first-child .list-header{
+            border-top: none;
+        }
+        &.left{
+            width: $panel_left_width;
+            left: 0;
+            border-width: 0 1px 0 0;
+        }
+        &.right{
+            width: $panel_right_width;
+            right: 0;
+            border-width: 0 0 0 1px;
+        }
+    }
+    .thumbnail-list .item{
+        padding-left: 50px;
+        min-height: 50px;
+        .label{padding-top: 7px}
+    }
+}
+
+.toggle-menu-container{
+    background: #fff;
+    border-top: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+    padding: 4px 0;
+    margin: 40px 0 0 0;
+}
+
+// This is used in the Fedd only for mobile
+.toggle-menu{
+    list-style: none;
+    display: block;
+    margin:0;
+    padding: 0;
+    border-bottom: 1px solid $form_element_border_color;
+    @include clearfix();
+    >li{
+        margin: 0 0 -1px 0;
+        padding:0 12px;
+        float: left;
+        position: relative;
+        text-align: center;
+        cursor: pointer;
+        font-size: 14px;
+        white-space: nowrap;
+        @include box-sizing();
+        >span{
+            line-height: $toggle-menu-height;
+            height: $toggle-menu-height;
+            display: block;
+            padding:0;
+            @include box-sizing();
+        }
+        sup.label{
+            background:$main_color;
+            line-height: 12px;
+        }
+        &.active{
+            >span{
+                border-bottom: 1px solid $main_color;
+                color: #36404e;
+            }
+        }
+        .sk{
+            margin-right: 5px;
+            color: $form_element_border_color;
+        }
+    }
+}
+
+
+.logo{
+    width: 112px;
+    height:22px;
+    display: block;
+    background-image:url("#{$images-path}logo-white.png");
+    background-repeat:no-repeat;
+    background-position: 0 0;
+    background-size:112px 22px;
+}
+
+// Toast-notification
+// Add class "open" in <div id="toast-notification" class=""> to show me, remove class after few sec to hide
+#toast-notification{
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    padding: 15px;
+    color:#fff;
+    background:#000;
+    width: 300px;
+    margin-left:-150px;
+    z-index: -10;
+    -webkit-transition: opacity 0.3s ease-in-out;
+    -moz-transition: opacity 0.3s ease-in-out;
+    -o-transition: opacity 0.3s ease-in-out;
+    transition: opacity 0.3s ease-in-out;
+    @include border-radius(6px);
+    opacity:0;
+    box-shadow:0px 0px 8px 0px rgba(0, 0, 0, 0.3);
+    .close-item{
+        background: #000;
+        padding:8px;
+        @include circle(32px);
+        position: absolute;
+        right: -10px;
+        top: -10px;
+        box-shadow:0px 0px 4px 0px #fff;
+    }
+    &.open{
+        z-index: 20000;
+        opacity:1;
+    }
+}
+
+// Users thumbnail
+.user-thumbnail{
+    width: 40px;
+    height: 40px;
+    display: block;
+    overflow: hidden;
+    background: #efeff0;
+    text-align: center;
+    position: relative;
+    float: left;
+    img{
+        display: block;
+        width: 100%;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        z-index: 1;
+    }
+    i{
+        font-size:38px;
+        color:#fff;
+        line-height:1em;
+    }
+}
+
+// Contact Card
+.contactcard{
+    position: relative;
+    display: block;
+    padding: 10px;
+    margin: 0 0 10px 0;
+    border: 1px solid $form_element_border_color;
+    overflow: hidden;
+    width: 100%;
+    background: #fff;
+    @include border-radius(6px);
+    @include box-sizing();
+    &.hasThumbnail{
+        padding-left:60px;
+        min-height:60px;
+    }
+    p{margin:0px}
+    .user-thumbnail,
+    .sked-thumbnail{
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        width:40px;
+        height:40px;
+        i{
+            font-size:40px;
+        }
+    }
+    .title{
+        font-weight: bold;
+        margin-bottom: 16px;
+    }
+}
+
+// ID card
+.idcard{
+    position: relative;
+    padding: 0 0 0 50px;
+    min-height: 40px;
+    @include box-sizing();
+    .sked-thumbnail{
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    .title{font-weight: bold}
+}
+
+// Pagination
+.pagination{
+    position: relative;
+    height: 50px;
+    background: #fff;
+    line-height: 30px;
+    overflow: hidden;
+    text-align: center;
+    padding: 10px 50px;
+    @include box-sizing();
+    button{
+        position: absolute;
+        top: 10px;
+    }
+    .btn-prev{
+        left: $content-padding;
+    }
+    .btn-next{
+        right: $content-padding;
+    }
+}
+
+#mapcanvas {
+    width: 100%;
+}
+.leaflet-control-container{visibility: hidden;}
+.external-map-controls{
+    position:absolute;
+    top:10px;
+    left:10px;
+    z-index:10;
+    .btn{
+        padding:4px 12px;
+        font-size:16px;
+    }
+}
+
+///////////////////////////////////////////////////////
+// PAST JOBS VIEW
+///////////////////////////////////////////////////////
+.alert-pastjobs{
+    position:relative;
+    padding-right:40px;
+    .btn{
+        position:absolute;
+        top:50%;
+        transform: translate(0, -50%);
+        right:5px;
+    }
+}
+
+// HACK: Fake loading for tabs
+#tabletContentRight .modal-loading-box{display: none;}
+.fakebg{
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: #ffffff;
+}
+
+
+///////////////////////////////////////////////////////
+// ACCOUNT DETAILS VIEW
+///////////////////////////////////////////////////////
+#accountDetailsView-section{
+    .sked-thumbnail{
+        @include sked-thumbnail-size(128px, true);
+        border:3px solid #fff;
+        margin: 10px auto;
+    }
+    p{
+        margin:0;
+    }
+}
+
+///////////////////////////////////////////////////////
+// AVAILABILITY VIEW
+///////////////////////////////////////////////////////
+#availabilityView-section{
+    input{margin-bottom: 5px;}
+}
+.availability-list{
+    margin-bottom: 10px;
+    .list-item{padding-right: 80px;}
+}
+#modal-add-availability{
+    input{width: 100% !important}
+}
+
+///////////////////////////////////////////////////////
+// ACTIVITY LIST
+///////////////////////////////////////////////////////
+.activity-list{
+    .type{color:$activity_color;}
+}
+
+.bg-graphic, .bg-graphic .overlay{
+    position:absolute;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+}
+.bg-graphic{
+    z-index:0;
+    background-color:$main_color;
+    img{
+        display: block;
+        position:relative;
+        z-index: 0;
+        width:100%;
+    }
+    .overlay{
+        z-index: 1;
+        opacity: 0.7;
+    }
+    &.blue{
+        .overlay{
+            background-color: $main_color;
+        }
+    }
+    &.darkgrey{
+        .overlay{
+            background-color:#000;
+        }
+    }
+}
+
+.plus-block-btn{
+  position: absolute;
+  width: 70px;
+  height: 50px;
+  top: $content-padding;
+  right: $content-padding;
+  button{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height:50px;
+    display: block;
+    z-index: 2;
+    padding:0;
+  }
+}
+
+// Custom Forms
+.iframe-body{
+    .content-padded{
+        background:#fff;
+    }
+}
+
+// Use this class to show hide elements on mobile an tablet
+.show-on-web{display: none;}
+.show-on-mobile{}
+.show-on-tablet{display: none;}

@@ -1,0 +1,53 @@
+// Determin what is the breakpoint to show the iPad site
+// http://viewportsizes.com/
+
+@media screen and (min-width: $tablet_breakpoint) {
+
+	#tabletContentMiddle, #tabletContentRight{
+		@include scroll-vertical();
+		position:absolute;
+		top: 0;
+		bottom: 0; // HACK for fix 100% height issue
+	}
+	.show-on-mobile{display: none;}
+	.show-on-tablet{display: inline-block;}		
+	
+	///////////////////////////////////////////////////////
+	// JOB VIEW
+	///////////////////////////////////////////////////////
+	.toggle-menu-container{
+		margin:0;
+		i{display: none;}
+	}
+	#jobView-section{
+		overflow: hidden;
+		padding-right: 460px;
+		@include box-sizing();
+	}
+	#tabletContentMiddle{
+		left: 0;
+		right: 460px;
+		border-right: 1px solid #dcdcdc;
+		@include box-sizing();
+	}
+	#tabletContentRight{
+		right: 0;
+		width: 460px;
+	}
+}
+
+
+// Hide tablet views on mobile
+@media screen and (max-width: 768px) {
+	.tablet-only {display: none}
+	.tablet-only-section.hidden{display: block;}
+}
+.warning-msg{
+	position: absolute;
+	left: 20px;
+	top: 50%;
+	right: 20px;
+	margin-top: -100px;
+	text-align: center;
+	color: $form_element_border_color;
+}

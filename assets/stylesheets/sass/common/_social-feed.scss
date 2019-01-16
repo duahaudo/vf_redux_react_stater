@@ -1,0 +1,138 @@
+$feed-form-height:200px;
+
+#feed-standalone{
+    width:100%;
+    border-left:1px solid #dddddd;
+}
+
+.widget-chatter{
+    float:right;
+    .widget-body{
+        padding-left: 0;
+        padding-right: 0;
+        background:#fff;
+    }
+}
+
+
+/*---------- Chatter & Social Feed --------------*/
+.chatfeed{float:right}
+#feed-standalone{width:100%;border-left:1px solid #dddddd;}
+#feed-embedded{
+    border-left:none;
+    position: relative;
+    padding: $feed-form-height 0 0 0;
+    height: 100%;
+    .chatterstatus{
+        width: 100%;
+        padding: 20px;
+        background: $feed-background;
+        border-bottom: solid 1px #c9cacc;
+        margin: 0;
+        height: $feed-form-height;
+        textarea{
+            width: 100%;
+            height: 80px;
+            min-height:80px;
+        }
+        .btn{
+            line-height:20px;
+            height: 34px;
+            min-height: 34px;
+            i{top:1px}
+        }
+    }
+    .chatterfilters{
+        top: $feed-form-height;
+        width: 100%;
+    }
+    &.hasFilters{
+        padding-top:$feed-form-height + $toggle-menu-height;
+    }
+    .feedposts{
+        list-style: none;
+        margin:0px;
+        width: 100%;
+        padding: 20px;
+        background: $feed-background;
+        @include clearfix();
+    }
+    .post-container{
+        width:100%;
+        display:block;
+        position:relative;
+        border:1px solid #dddddd;
+        margin-bottom: 20px;
+        background: #fff;
+        @include clearfix();
+    }
+    .post{
+        padding: 20px;
+        position: relative;
+        min-height: 70px;
+        position:relative;
+        width: 100%;
+        @include box-sizing();
+    }
+    .post-user{
+        position: relative;
+        padding: 0 0 0 50px;
+        height: 55px;
+        line-height: 1;
+    }
+    .post-title{
+        color:#000;
+        font-size:13px;
+        padding-bottom: 14px;
+    }
+    .post-body{
+        margin-bottom: 10px;
+        color: #555555;
+    }
+    .posttime{
+        font-size:11px;
+        color:#999999;
+    }
+    .likes{
+        color:#cecece;
+        margin: 0;
+        span{
+            margin-right:10px;
+            font-size:13px;
+        }
+    }
+    .sked-thumbnail {
+        position: absolute;
+        top: 0;
+        left: 0;
+        @include sked-thumbnail-size(40px);
+    }
+    .feedcomments{
+        list-style: none;
+        margin:0px;
+        @include clearfix();
+        .post-container{
+            background:#f5fafe;
+            border-color: $form_element_border_color;
+            border-width: 1px 0 0 0;
+            margin:0;
+        }
+        .post {
+            padding-left:70px;
+        }
+        .sked-thumbnail{
+            top: 20px;
+            left: 20px;
+        }
+    }
+    .tracked-changes{list-style:none;margin: 0}
+    .tracked-changes span{color:#3a85be;font-style:italic;}
+
+    // Toggle
+    .toggle-menu{
+        >li{
+            margin-right:0;
+            padding:0 12px;
+        }
+    }
+}

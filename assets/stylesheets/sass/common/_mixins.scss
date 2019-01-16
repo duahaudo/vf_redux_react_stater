@@ -1,0 +1,69 @@
+// Border radius
+// --------------------------------------------------
+
+@mixin border-radius( $radius: 2px ) {
+	-webkit-border-radius: $radius;
+		 -moz-border-radius: $radius;
+					border-radius: $radius;   
+}
+
+// Clearfix
+// --------------------------------------------------
+
+@mixin clearfix {
+	*zoom: 1;
+	&:before,
+	&:after {
+		display: table;
+		content: "";
+		line-height: 0;
+	}
+	&:after {
+		clear: both;
+	}
+}
+
+// Box sizing
+// --------------------------------------------------
+
+@mixin box-sizing($boxmodel: border-box) {
+	-webkit-box-sizing: $boxmodel;
+		 -moz-box-sizing: $boxmodel;
+					box-sizing: $boxmodel;
+}
+
+// Animation
+@mixin animation ($name, $duration: 300ms, $delay: 0, $ease: ease) {
+	-webkit-animation: $name $duration $delay $ease;
+	-moz-animation:    $name $duration $delay $ease;
+	-ms-animation:     $name $duration $delay $ease;
+	-o-animation:     $name $duration $delay $ease;
+	animation:     $name $duration $delay $ease;
+}
+
+// Sked Thumbnail directive
+@mixin sked-thumbnail-size( $size: 40px, $rounded: false ) {
+	@if $rounded == true {
+		@include border-radius( $size / 2 );
+		img{
+			@include border-radius( $size / 2 );
+		}
+	}
+	width: $size;
+	height: $size;
+	i{
+		font-size:floor( ($size / 3) * 2 );
+		color:#fff;
+		line-height:$size;
+	}
+}
+
+// Circle
+@mixin circle( $size: 10px ) {
+	display: inline-block;
+	min-width: $size;
+	height: $size;
+	text-align: center;
+	@include border-radius(100%);
+	@include box-sizing();
+}

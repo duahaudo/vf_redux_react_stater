@@ -1,0 +1,257 @@
+// @import (css) "../../../node_modules/leaflet/dist/leaflet.css";
+
+/* Map view
+-------------------------------------------------------------------------------*/
+.widget-map .widget-title .trimText{width: 40px}
+
+/*Google map and cards in map
+-------------------------------------------------------------------------------*/
+.holder{margin: -14px 0 0 -5px}
+
+.map-canvas{
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.trackingDot{
+    background: $color_purple;
+    z-index: 999999 !important;
+    @include circle();
+}
+
+// leaflet map overwrites
+.leaflet-popup-tip-container{margin-top: -1px !important;}
+
+// Markers comon elements
+.div-img{
+    position: absolute;
+    z-index: 2;
+    overflow: hidden;
+    background: #cacaca;
+    @include border-radius(16px);
+    img{
+        display: block;
+        margin: 0;
+    }
+}
+
+.mapsvg{
+    cursor:pointer !important;
+    position: relative;
+    z-index: 2;
+}
+
+.marker-icon-user{
+    background: url("#{$images-path}marker-icon-user.png") no-repeat 0 0 transparent;
+    width: 16px;
+    height: 16px;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -8px;
+    margin-left: -8px;
+}
+
+// Single job marker
+.mapsvg-marker-job{
+    width: 15px;
+    height: 18px;
+    display: block;
+    position: relative;
+    z-index: 99999 !important;
+    overflow:hidden;
+    svg{
+        width: 15px;
+        height: 18px;
+    }
+    // Ordering to follow the job_status in Metadata.coffee
+    &.lightgrey .mapsvg path, .mapsvg path{fill: $color_grey_light;stroke:darken($color_grey_light, 30%);}
+    &.darkgrey .mapsvg path, .mapsvg path{fill: $color_grey_dark;stroke:darken($color_grey_dark, 30%);}
+    &.orange .mapsvg path{fill: $color_orange;stroke:darken($color_orange, 30%);}
+    &.lightblue .mapsvg path{fill: $color-blue-light;stroke:darken($color-blue-light, 30%);}
+    &.blue .mapsvg path{fill: $color_blue;stroke:darken($color_blue, 30%);}
+    &.orchid .mapsvg path{fill: $color_orchid;stroke:darken($color_orchid, 30%);}
+    &.magenta .mapsvg path, .mapsvg path{fill: $color_magenta;stroke:darken($color_magenta, 30%);}
+    &.purple .mapsvg path{fill: $color_purple;stroke:darken($color_purple, 30%);}
+    &.green .mapsvg path{fill: $color_green;stroke:darken($color_green, 30%);}
+    &.red .mapsvg path{fill: $color_red;stroke:darken($color_red, 30%);}
+}
+
+// Clustered job markers
+.clustered-markers{
+    width: 28px;
+    height: 34px;
+    display: block;
+    position: absolute;
+    z-index: 99999 !important;
+    svg{
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 28px;
+        height: 34px;
+        z-index: 1;
+    }
+    .clustered-number{
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        line-height: 28px;
+        font-size: 12px;
+        color: #3381b8;
+    }
+}
+// Clustered resources markers
+.clustered-markers-resources{
+    width: 36px;
+    height: 42px;
+    display: block;
+    position: absolute;
+    svg{
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 36px;
+        height: 42px;
+        z-index: 1;
+    }
+    .clustered-number-resources{
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        width: 36px;
+        line-height: 36px;
+        font-size: 12px;
+        color: #939597;
+    }
+}
+
+// Single resource marker
+.mapsvg-marker-resource{
+    width: 36px;
+    height: 42px;
+    display: block;
+    position: relative;
+    svg{
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        width: 36px;
+        height: 42px;
+        display: block;
+    }
+    .div-img{
+        top: 5px;
+        left: 5px;
+        width: 26px;
+        height: 26px;
+        img{
+            width: 26px;
+            height: 26px;
+        }
+    }
+}
+
+
+// Home icon for multiple Resources
+.home-resources{
+    width: 48px;
+    height: 44px;
+    display: block;
+    position: relative;
+    svg{
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        cursor:inherit;
+        width: 48px;
+        height: 44px;
+        display: block;
+    }
+    .div-img{
+        top: 6px;
+        left: 6px;
+        width: 26px;
+        height: 26px;
+        img{
+            width: 26px;
+            height: 26px;
+        }
+    }
+}
+
+// Home icon for a single resource
+.home-resource{
+    width: 37px;
+    height: 43px;
+    display: block;
+    position: relative;
+    svg{
+        width: 37px;
+        height: 43px;
+        display: block;
+    }
+}
+
+.mapsvg-marker-timeago{
+    width: 100px;
+    height: 56px;
+    display: block;
+    position: relative;
+    svg{
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        cursor:inherit;
+        width: 100px;
+        height: 56px;
+        display: block;
+    }
+    .div-img{
+        top: 7px;
+        left: 7px;
+        width: 34px;
+        height: 34px;
+        img{
+            width: 34px;
+            height: 34px;
+        }
+    }
+    .div-timeago{
+        position: absolute;
+        z-index: 3;
+        top: 17px;
+        right: 7px;
+        font-size: 8px;
+        background: #fff;
+        @include border-radius(6px);
+        padding: 1px 3px;
+    }
+}
+
+.mapsvg-activity{
+    width: 15px;
+    height: 18px;
+    display: block;
+    position: relative;
+    z-index: 99999 !important;
+    overflow:hidden;
+    svg{
+        cursor:inherit;
+        width: 15px;
+        height: 18px;
+        display: block;
+    }
+}
+
+.leaflet-overlay-pane svg {
+  width:auto;
+  height:auto;
+}

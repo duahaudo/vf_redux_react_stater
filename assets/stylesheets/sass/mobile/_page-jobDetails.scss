@@ -1,0 +1,364 @@
+///////////////////////////////////////////////////////
+// JOB VIEW
+///////////////////////////////////////////////////////
+#jobView-section{
+    .urgency{
+        float: right;
+    }
+}
+.icons-menu{
+    padding:20px 0;
+    table{
+        width:100%;
+    }
+    .btn{
+        padding:0;
+        min-height: $button-height;
+        height: $button-height;
+        line-height: $button-height;
+        i{
+            position:relative;
+            top: 3px;
+        }
+    }
+}
+.icons-menu-vertical,
+.icons-menu{
+    width:100%;
+    .btn i{
+        font-size:28px;
+        color:#fff;
+    }
+}
+
+.icons-menu-vertical{
+    .btn i{
+        font-size:22px;
+    }
+}
+
+.status-times{
+    position: relative;
+    border-bottom: 1px solid $form_element_border_color;
+    .grid{
+        margin-bottom: 0;
+    }
+    .col-6{
+        padding: $content-padding $content-padding 5px $content-padding;
+    }
+
+    .status-times-section{
+        border-top: 1px solid $form_element_border_color;
+    }
+    .vertical-line{
+        background: $form_element_border_color;
+        width: 1px;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+    }
+    .status-times-title{
+        font-size: $font-size-h6;
+        font-weight: 300;
+        line-height: 1.2;
+    }
+    .status-times-title, p{
+        margin-bottom: 5px;
+    }
+    p{font-weight: bold;}
+    @media screen and (min-width: 430px){
+        .status-times-title{
+            top:10px;
+            left:10px;
+        }
+        .top-right, 
+        .timezone{
+            top:10px;
+            right:10px;
+        }
+        .status-times-date{
+            bottom:0px;
+            left:10px;
+        }
+        .status-times-time{
+            bottom:0px;
+            right:10px;
+        }
+    }
+}
+
+.jobNotes{
+  position: relative;
+  .btn{
+    position: absolute;
+    right: $content-padding;
+    top:0;
+  }
+}
+
+
+// Remove timezone on devices smalled than 510px, this has to be done because the text "SLA MUST START BEFORE" is to long for mobile;
+@media screen and (max-width: 500px){
+    .status-times .hideTimezone{
+        display: none;
+    }
+}
+
+///////////////////////////////////////////////////////
+// Job attachments
+///////////////////////////////////////////////////////
+#upload{
+    width: 100%;
+    @include box-sizing();
+}
+#fileInput {
+    width: 100%;
+    opacity:0;
+    height: 50px;
+    z-index: 3;
+}
+#canvas-group{
+    display: none;
+    canvas{border: 1px solid red}
+}
+#imgresizepreview{
+    position: absolute;
+    height: 0px;
+    overflow: hidden;
+}
+.upload-preview{
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, .1);
+    overflow: hidden;
+    margin-bottom: 10px;
+    background: #fff;
+    min-height: 160px;
+    margin-top: 20px;
+    display: none;
+    @include box-sizing();
+    @include border-radius(6px);
+    padding: 20px 105px 20px 20px;
+    position: relative;
+    &.active{display: block;}
+}
+.upload-preview-content{
+    position: relative;
+    min-height: 118px;
+}
+.uploaded-file{
+    width: 100%;
+    min-height: 120px;
+    position: relative;
+    .preview-img{display: block;margin:0;width:100%;}
+    .filename{display: block;margin: 20px 0 0 0}
+}
+.options-buttons{
+    background:#fff;
+    display: inline-block;
+    position: absolute;
+    z-index: 9999;
+    padding: 3px;
+    width: 64px;
+    @include border-radius();
+    box-shadow:0px, 0px, 8px, 0px, rgba(0, 0, 0, 0.3);
+    @include box-sizing();
+    right: 20px;
+    top: 20px;
+    button{border: none;padding: 5px;margin:3px; text-align: center;line-height: 50px;font-size: 40px; width: 50px;height: 50px;@include border-radius();}
+    i{color: #fff;}
+}
+#loading-div{
+    background: url("#{$images-path}popup-bg.png") repeat transparent;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    text-align: center;
+    font-size: 3em;
+    i{position: absolute;top: 50%;left: 50%;margin:-20px 0 0 -20px;font-size:40px}
+}
+.attachments-list{
+    .label{
+        margin:0;
+        padding: 0;
+        display: block;
+        margin:-10px -30px -10px 0;
+        color: $color_blue;
+        line-height: 59px;
+    }
+}
+
+#modal-uploads{
+    .modal-box{
+        overflow: visible;
+        background: none;
+        width: 300px;
+        left: 50%;
+        top: 50%;
+        margin-left: -150px;
+        margin-top: -150px;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+        
+        .btn{
+            color: #fff;
+            i{
+                color: #fff;
+            }
+        }
+        .btn-menu{
+            border-color: #2f3030;
+            border-style: solid;
+            background: #1d2022;
+            width: 150px;
+            height: 150px;
+            float: left;
+            i{font-size:80px;}
+        }
+        .btn1{border-width: 0 1px 1px 0;@include border-radius(6px 0 0 0)}
+        .btn2{border-width: 0 0 1px 0;@include border-radius(0 6px 0 0)}
+        .btn3{border-width: 0 1px 0 0;@include border-radius(0 0 0 6px)}
+        .btn4{border-width: 0 0 0 0;@include border-radius(0 0 6px 0)}
+    }
+    .close-modal{
+        position: absolute;
+        margin:0;
+        top: -40px;
+        right: -10px;
+    }
+}
+// Buttons menu, has icon and text
+// User in file uploads
+.btn-menu{
+    width: 100%;
+    display: block;
+    text-align: center;
+    @include box-sizing();
+    // Icon css
+    i{
+        display: block;
+        margin: 0 auto;
+    }
+    // Text css
+    >span{
+        display: block;
+        width: 100%;
+        text-transform: capitalize;
+    }
+}
+
+
+///////////////////////////////////////////////////////
+// Text area with save button
+///////////////////////////////////////////////////////
+.notes-box{
+    position: relative;
+    textarea{
+        margin:0;
+        height: 150px;
+        @include border-radius(4px 4px 0 0);
+    }
+    .charcount{
+        position: absolute;
+        top: 151px;
+        left: 10px;
+        z-index: 2;
+    }
+    .notes-bottom{
+        background: #fff;
+        border: 1px solid $form_element_border_color;
+        margin-top: -4px;
+        position: relative;
+        z-index: 1;
+        text-align: right;
+        padding: 20px 10px;
+        @include border-radius(0 0 4px 4px);
+        @include box-sizing();
+    }
+}
+
+///////////////////////////////////////////////////////
+// Job Resources
+///////////////////////////////////////////////////////
+.section-resources{
+    .thumbnail-list{
+        .list-item{
+            padding-right: 10px;
+        }
+    }
+}
+
+///////////////////////////////////////////////////////
+// Job Signature
+///////////////////////////////////////////////////////
+.btn-signature{margin: 10px 0 0 0}
+
+// HACK, signature always visible so sctipt can get the parent width
+#modal-signature{
+    display: block !important;
+    z-index: -999;
+    &.active{
+        z-index: 999;
+    }
+    .modal-box{
+        top: 50%;
+        left:50%;
+        width:460px;
+        margin-top:-135px;
+        margin-left:-230px;
+    }
+    #canvas-div, .btn-group{display:block}
+}
+
+///////////////////////////////////////////////////////
+// Job Chatter feed
+///////////////////////////////////////////////////////
+.chatter-jobDetails-section{
+    // position:relative;
+    padding-top:40px;
+    .chatter-heading{
+        position:absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1;
+        background: $feed-background;
+    }
+}
+
+@media screen and (max-width: 460px) {
+    #modal-signature{
+        .modal-box{
+            top: 50%;
+            width:300px;
+            left:50%;
+            margin-left:-150px;
+            margin-top:-52px;
+            .modal-body:before {
+                content: "Please rotate to landscape before using this feature";
+                line-height: 20px;
+            }
+        }
+        #canvas-div, .btn-group{display:none}
+    }
+}
+
+#canvas-div{
+    width: 100%;
+    min-width: 270px;
+    background: #fff;
+    border:1px solid #b7b7b7;
+    margin: 0 0 10px 0;
+    overflow: hidden;
+    @include box-sizing();
+    @include border-radius(10px);
+}
+#canvas-pd{
+    padding: 3px;
+    overflow: hidden;
+    @include box-sizing();
+}

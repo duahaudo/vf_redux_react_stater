@@ -1,0 +1,36 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false">
+    <head>
+        <meta charset="utf-8" />
+        <title>Follow Up Appointment</title>
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="application-name" content="React" />
+        <meta name="apple-mobile-web-app-title" content="React" />
+        <meta name="theme-color" content="#0080FF" />
+        <meta name="msapplication-navbutton-color" content="#0080FF" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="msapplication-starturl" content="/" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="preload" href="{!URLFOR($Resource.skedFollowUpAppointment, '/dist/main.js')}" as="script"/>
+        <link rel="preload" href="{!URLFOR($Resource.skedFollowUpAppointment, '/dist/vendor.js')}" as="script"/>
+        <link rel="preload" href="{!URLFOR($Resource.skedFollowUpAppointment, '/dist/manifest.js')}" as="script"/>
+
+        <link rel="stylesheet" href="{!URLFOR($Resource.skedFollowUpAppointment, '/dist/styles.css')}" />
+    </head>
+
+    <body>
+    <noscript>
+        <a href="http://enable-javascript.com/">Javascript must me enabled to use this site.</a>
+    </noscript>
+    <react style="font-family: 'Salesforce Sans', Arial, sans-serif;
+                        font-size: 100%;
+                        line-height: 1.5;
+                        background: #fdfdfd;
+                        color: #3e3e3c;
+                        -webkit-tap-highlight-color: transparent;"></react>
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=fetch"></script>
+    <script type="text/javascript" src="{!URLFOR($Resource.skedFollowUpAppointment, '/dist/manifest.js')}"></script>
+    <script type="text/javascript" src="{!URLFOR($Resource.skedFollowUpAppointment, '/dist/vendor.js')}"></script>
+    <script type="text/javascript" src="{!URLFOR($Resource.skedFollowUpAppointment, '/dist/main.js')}"></script>
+    </body>
+</apex:page>

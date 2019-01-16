@@ -1,0 +1,46 @@
+$android-page-header-height:            50px;
+$android-page-header-font-size:         20px;
+$android-page-header-button-margin-top: ( $android-page-header-height - $page-header-button-height ) / 2;
+// Android
+.android{
+    .item-radio {-webkit-animation: androidCheckedbugfix infinite 1s;}
+
+    // Fix Randomly Disappearing Absolutely-Positioned Elements
+    // http://stackoverflow.com/questions/9807620/ipad-safari-scrolling-causes-html-elements-to-disappear-and-reappear-with-a-dela
+    .fix-android-scroll{
+        -webkit-overflow-scrolling: touch;
+        > * {
+            @include transform( translateZ(0px) );
+        }
+        > * {
+            @include transform( translate3d(0,0,0) );
+        }
+    }
+
+    .android-novisible{
+        visibility: hidden;
+    }
+}
+
+// Xamarin Custom Forms
+.android,
+.native-android{
+    header{
+        height: $android-page-header-height;
+        background: $blue-android;
+        line-height: $android-page-header-height;
+        .title{
+            left: $android-page-header-height;
+            right: $android-page-header-height;
+            font-size: $android-page-header-font-size;
+            line-height: $android-page-header-height;
+            font-weight: 700;
+        }
+        .btn{
+            margin-top:$android-page-header-button-margin-top;
+        }
+    }
+    section{
+        top: $android-page-header-height;
+    }
+}

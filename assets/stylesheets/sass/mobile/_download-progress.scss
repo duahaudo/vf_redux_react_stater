@@ -1,0 +1,230 @@
+$download-progress-zindex:9999;
+$download-bar-width:200px;
+$download-bar-height:16px;
+$download-bar-background: #E6E6E6;
+$download-bar-progress-width: $download-bar-width / 2;
+$download-circle-size: 120px;
+$download-circle-background: lighten($color_blue, 40%);
+$download-circle-color: $color_green;
+$download-inset-size: $download-circle-size - 30px;
+$download-inset-color: #ffffff;
+$download-transition-length: 1s;
+$download-shadow: 6px 6px 10px rgba(0,0,0,0.2);
+$download-percentage-color: $color_green;
+$download-percentage-font-size: 22px;
+$download-percentage-text-width: 57px;
+$download-radial-progress-box-margin: 50px;
+$download-padding:$content-padding;
+
+
+.download-progress{
+    position: fixed;
+    top: $download-radial-progress-box-margin;
+    left: $download-radial-progress-box-margin;
+    right: $download-radial-progress-box-margin;
+    bottom: $download-radial-progress-box-margin;
+    background: rgba(255,255,255,0.9);
+    z-index: $download-progress-zindex;
+    box-shadow: $download-shadow;
+    display: none;
+    opacity:0;
+    &.active{
+        display: block;
+        opacity:1;
+    }
+}
+.close-progress{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 2em;
+    color: $form_element_border_color;
+}
+
+// Bar type download
+.bar-box{
+    position:absolute;
+    top:50%;
+    left: 50%;
+    width:$download-bar-width;
+    margin-top: -$download-bar-height * 3;
+    margin-left: -$download-bar-width / 2;
+    text-align: center;
+}
+.download-bar-title{
+    color: #000;
+    font-size: 12px;
+    line-height: 16px;
+    margin-bottom: $download-padding;
+}
+.bar-progress {
+    width:$download-bar-width;
+    height:$download-bar-height;
+    border:1px solid $form_element_border_color;
+    border-radius:0px;
+    overflow:hidden;
+    position: relative;
+    background: $download-bar-background;
+    &:after {
+        content: " ";
+        display:block;
+        width:$download-bar-progress-width;
+        top:-50%;
+        height:250%;
+        position:absolute;
+        animation: greenglow 3s linear infinite;
+        -webkit-animation: greenglow 3s linear infinite;
+        z-index:2;
+        background: #1CAE30;
+    }
+
+}
+
+.colorlight{
+    width:$download-bar-progress-width;
+    top:-50%;
+    height:250%;
+    position:absolute;
+    animation: greenglow 3s linear infinite;
+    -webkit-animation: greenglow 3s linear infinite;
+    z-index:2;
+    -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 0%,rgba(0,0,0,0) 70%,rgba(0,0,0,0) 100%);
+    mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 70%,rgba(0,0,0,1) 100%);
+    /*background: linear-gradient(to bottom, rgba(166,229,179,1) 0%,rgba(166,229,179,1)42%,rgba(0,219,49,1) 42%);*/
+    background:rgba(0,219,49,1);
+}
+
+@-webkit-keyframes greenglow {
+    from {
+        left:-$download-bar-progress-width;
+    }
+    to {
+        left:100%;
+    }
+}
+@-moz-keyframes greenglow {
+    from {
+        left:-$download-bar-progress-width;
+    }
+    to {
+        left:100%;
+    }
+}
+@-o-keyframes greenglow {
+    from {
+        left:-$download-bar-progress-width;
+    }
+    to {
+        left:100%;
+    }
+}
+@keyframes greenglow {
+    from {
+        left:-$download-bar-progress-width;
+    }
+    to {
+        left:100%;
+    }
+}
+
+// Radial type download
+.radial-progress {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width:  $download-circle-size;
+    height: $download-circle-size;
+    margin-top: -$download-circle-size / 2;
+    margin-left: -$download-circle-size / 2;
+    background-color: $download-circle-background;
+    border-radius: 50%;
+    z-index: 9999;
+    .circle {
+        .mask, .fill, .shadow {
+            width:    $download-circle-size;
+            height:   $download-circle-size;
+            position: absolute;
+            border-radius: 50%;
+        }
+        .shadow {
+            box-shadow: $download-shadow inset;
+        }
+        .mask, .fill {
+            -webkit-backface-visibility: hidden;
+            transition: -webkit-transform $download-transition-length;
+            transition: -ms-transform $download-transition-length;
+            transition: transform $download-transition-length;
+            border-radius: 50%;
+        }
+        .mask {
+            clip: rect(0px, $download-circle-size, $download-circle-size, $download-circle-size/2);
+            .fill {
+                clip: rect(0px, $download-circle-size/2, $download-circle-size, 0px);
+                background-color: $download-circle-color;
+            }
+        }
+    }
+    .inset {
+        width:       $download-inset-size;
+        height:      $download-inset-size;
+        position:    absolute;
+        margin-left: ($download-circle-size - $download-inset-size)/2;
+        margin-top:  ($download-circle-size - $download-inset-size)/2;
+
+        background-color: $download-inset-color;
+        border-radius: 50%;
+        box-shadow: $download-shadow;
+        .percentage {
+            height:   $download-percentage-font-size;
+            width:    $download-percentage-text-width;
+            overflow: hidden;
+
+            position: absolute;
+            top:      ($download-inset-size - $download-percentage-font-size) / 2;
+            left:     ($download-inset-size - $download-percentage-text-width) / 2;
+
+            line-height: 1;
+            
+        }
+    }
+    .numbers {
+        width:          $download-percentage-text-width;
+        display:        inline-block;
+        vertical-align: top;
+        text-align:     center;
+        font-weight:    800;
+        font-size:      $download-percentage-font-size;
+        color:          $download-percentage-color;
+    }
+
+    $i: 0;
+    $increment: 180deg / 100;
+    
+    @for $i from 0 through 100 {
+        &[data-progress="#{$i}"] {
+            .circle {
+                .mask.full, .fill {
+                    -webkit-transform: rotate($increment * $i);
+                    -ms-transform: rotate($increment * $i);
+                    transform: rotate($increment * $i);
+                }   
+                .fill.fix {
+                    -webkit-transform: rotate($increment * $i * 2);
+                    -ms-transform: rotate($increment * $i * 2);
+                    transform: rotate($increment * $i * 2);
+                }
+            }
+        }
+    }
+}
+
+// _mobile
+#tabletContentRight{
+    // position: relative;
+    // z-index: 1;
+    .modal-loading-box{display: none;}
+}
+// _mobile-utilities
+.flexible {
+    z-index: 1;
+}

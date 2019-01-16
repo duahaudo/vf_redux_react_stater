@@ -1,0 +1,262 @@
+//
+// Directives
+// --------------------------------------------------
+
+///////////////////////////////////////////////////////
+// Job button actions Directive
+///////////////////////////////////////////////////////
+.btn-group-joballocation{
+    width: 100%;
+    .btn{
+        width: 25%;
+        font-size: 24px;
+        border-color: #cccccc;
+        @include box-sizing();
+        &.active{
+            i{color: #fff}
+        }
+    }
+    .btnDeclined{
+        &.active{background: $cancelled}
+    }
+    .btnAccepted{
+        &.active{background: $ready}
+    }
+    .btnCheckedIn{
+        &.active{background: $in_progress}
+    }
+    .btnComplete{
+        &.active{background: $complete}
+    }
+}
+
+// Thumbnail Directive
+.sked-thumbnail{
+    display: block;
+    overflow: hidden;
+    background: #5aa5d3;
+    text-align:center;
+    position: relative;
+    @include sked-thumbnail-size(40px);
+    @include border-radius(3px);
+    img{
+        display: block;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        z-index: 1;
+        max-width: none;
+        -webkit-transition: opacity 0.3s ease-in-out;
+        -moz-transition: opacity 0.3s ease-in-out;
+        -o-transition: opacity 0.3s ease-in-out;
+        transition: opacity 0.3s ease-in-out;
+        opacity:0;
+        @include border-radius(3px);
+        &.loaded{
+            opacity:1;
+        }
+    }
+}
+
+// Directive Mobilepagination
+.mobilepagination{
+    background: #fff;
+    width: 100%;
+    height: 60px;
+    text-align: center;
+    line-height: 60px;
+    position: relative;
+    z-index: 1;
+    color: $color_grey;
+    border-color: $form_element_border_color;
+    border-style: solid;
+    border-width: 1px 0;
+    margin: $content-padding 0;
+    .pg-divSelect{
+        position:absolute;
+        top:0;
+        left:0;
+        right:0;
+        bottom:0;
+        z-index:1;
+    }
+    button{
+        background: none;
+        border: none;
+        padding: 0;
+        text-align: center;
+        width: 50px;
+        height: 60px;
+        color: $color_grey;
+        position:relative;
+        z-index:2;
+        i{
+            margin: 0 -2px;
+        }
+    }
+    .pg-Start{
+        float: left;
+    }
+    .pg-Prev{
+        float: left;
+    }
+    .pg-Select{
+        width:auto;
+    }
+    .pg-Next{
+        float: right;
+    }
+    .pg-End{
+        float: right;
+    }
+
+}
+// Directive skedDateRange
+.skedDateRange{
+    width:185px;
+    input{
+        width:60px;
+        display:inline-block;
+    }
+}
+
+// Directive Rating
+.rating{color: $base-color; display: inline-block;}
+.rating.editable [class^="star"], .rating.editable [class*=" star"]{cursor: pointer}
+.rating1 .star1{color:#e9c82d;display: inline-block}
+.rating2 .star1, .rating2 .star2{color:#e9c82d;display: inline-block}
+.rating3 .star1, .rating3 .star2, .rating3 .star3{color:#e9c82d;display: inline-block}
+.rating4 .star1, .rating4 .star2, .rating4 .star3, .rating4 .star4{color:#e9c82d;display: inline-block}
+.rating5 .star1, .rating5 .star2, .rating5 .star3, .rating5 .star4, .rating5 .star5{color:#e9c82d;display: inline-block}
+
+
+// Directive Char Count
+.charcount{
+    color:$form_element_border_color;
+    font-size:12px;
+}
+
+// Directive TypeAhead
+.twitter-typeahead{
+    width: 100%;
+    margin: $content-padding 0;
+    .tt-dropdown-menu{
+        width: 100%;
+        @include border-radius(2px);
+        background-color:#f3f3f3;
+        padding:0px;
+    }
+    span div{
+        width: 100%;
+        position:relative;
+        float:left;
+        background-color:#fff;
+        border:1px solid $form_element_border_color;
+        @include box-sizing();
+    }
+    .tt-header{
+        width: 100%;
+        line-height: 1.5em;
+        padding: $content-padding;
+        margin: 0;
+        background-color:#f3f3f3;
+    }
+    .tt-suggestions{
+        width: 100%;
+        text-align: left;
+        margin: 0;
+    }
+}
+
+.tt-suggestion.tt-is-under-cursor{
+    color: #fff;
+    background-color: $main_color;
+    background-image: none;
+}
+
+span.tt-suggestions div{
+    float:none;
+    margin:0;
+    padding: $content-padding;
+    border:none;
+    @include box-sizing();
+}
+
+// Toggle horizontal (Tabs directive)
+.toggle-bar{
+    display: block;
+    list-style: none;
+    margin:0;
+    width: 100%;
+    overflow: hidden;
+    background: #24333c;
+    @include unselectable();
+    li{
+        border: none;
+        position:relative;
+        padding: 15px 20px;
+        float:left;
+        font-weight: bold;
+        cursor: pointer;
+        @include box-sizing();
+        @include unselectable();
+    }
+    li.active{background:#fff;color: $base-color;}
+    li:active{background-color:$main_color;color: #fff}
+}
+
+// Tap directive
+.sked-tap{
+    -webkit-transition: background-color 0.2s linear;
+    -moz-transition: background-color 0.2s linear;
+    -o-transition: background-color 0.2s linear;
+    transition: background-color 0.2s linear;
+}
+.sked-tap.tapped{
+    background: $focus-background-color !important;
+    -webkit-transition: none;
+    -moz-transition: none;
+    -o-transition: none;
+    transition: none;
+}
+
+// datetime local directive
+.skedDateTimeLocal{
+    position:relative;
+    .timezone{
+        position: absolute;
+        right: 15px;
+        background: #fff;
+        top: 50%;
+        height:26px;
+        margin-top: -14px;
+        display: block;
+        padding: 5px 5px 5px 10px;
+        @include box-sizing();
+    }
+}
+.input-timezone{
+    position: absolute;
+    right: 20px;
+    background: #fff;
+    top: 50%;
+    height:26px;
+    margin-top: -14px;
+    display: block;
+    padding: 5px 0 5px 10px;
+    @include box-sizing();
+}
+
+
+// RatingScale.coffee
+.sked-rating-scale{
+    .btn-group{
+        width:100%;
+        .btn{
+            width: 9.09%;
+            padding-right: 0;
+            padding-left: 0;
+            overflow: hidden;
+        }
+    }
+}

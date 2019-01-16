@@ -1,0 +1,64 @@
+// iOS Padding at the top
+.ios{
+    .left-menu, #f-left-shadow{
+        top:$ios-top-padding;
+    }
+    .modal-sidebar{
+        top: $page-header-height + $ios-top-padding;
+    }
+    .widget-save-bar{
+        top: $page-header-height + $ios-top-padding;
+    }
+    header{
+        height: $page-header-height + $ios-top-padding;
+        padding-top: $ios-top-padding;
+        .title{
+            top: $ios-top-padding;
+        }
+    }
+    section{
+        top: $page-header-height + $ios-top-padding;
+        &.noHeader{
+            top: 0;
+        }
+    }
+    // Overwrites for iOS6
+    &.ios-6{
+        .left-menu, #f-left-shadow{
+            top:0;
+        }
+        .modal-sidebar{
+            top: $page-header-height;
+        }
+        .widget-save-bar{
+            top: $page-header-height;
+        }
+        header{
+            height: $page-header-height;
+            padding-top: 0;
+            .title{
+                top: 0;
+            }
+        }
+        section{
+            top: $page-header-height;
+        }
+    }
+    .iframe-view {
+        margin: $ios-top-padding 0 0 0;
+        background: white;
+    }
+}
+
+// Xamarin Custom Forms
+.ios,
+.native-ios{
+    header{
+        background: $blue-ios;
+    }
+}
+.native-ios{
+    header{
+        padding: 0 5px 0 0;
+    }
+}
