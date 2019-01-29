@@ -78,3 +78,8 @@ header {
   background-size: cover;
   opacity: 0.5;
 }
+
+input[disabled] {
+  color: gray;
+  opacity: 1;
+}

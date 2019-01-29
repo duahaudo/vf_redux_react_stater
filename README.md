@@ -8,3 +8,6 @@
 1. Run in localhost `yarn start` 
 2. Build to deploy `yarn build`
 3. Run build file in local `yarn prod`
+
+# Known Issues
+* Node-sass: just run `yarn add node-sass` again

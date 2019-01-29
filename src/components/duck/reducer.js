@@ -1,15 +1,16 @@
 import * as constant from './type';
 
 export default function reducer(state = {
-  main: {},
-  common: {},
-  saveFn: () => {
-  },
+  forceConn: null,
+  jobId: window.jobId,
+  userId: window.userId,
+  job: null,
   view: constant.VIEW_HOME,
   selectedItem: undefined,
 
   timezone: '',
-  timestamp: Date.now()
+  timestamp: Date.now(),
+  showLoading: false
 }, action) {
   switch (action.type) {
     case constant.ACTION_INIT_DATA: {
@@ -32,20 +33,11 @@ export default function reducer(state = {
         selectedItem: {...action.item}
       };
     }
-    case constant.ACTION_SAVE_DATA_TO_SALESFORCE: {
-
-      // const changeSet = state.supportNotes.changeSet();
-      state.saveFn({
-        jobId: state.main.jobId,
-      }, {
-        // jobId: state.main.jobId,
-        // job: state.main.job,
-        // contact: state.main.contact,
-        // supportNotes: state.supportNotes.listAll(),
-        // attachment: state.main.attachment
-      }, false, true);
-
-      return {...state};
+    case constant.ACTION_SHOW_LOADING: {
+      return {...state, showLoading: action.show}
+    }
+    case constant.ACTION_SET_JSFORCE_OBJECT: {
+      return {...state, forceConn: action.forceConn}
     }
   }
 

@@ -15,7 +15,7 @@ $color_amethyst:                    #8562a7;
 
 $color-disabled:                    #ddd;
 
-// Statuses colors to reflect whatever is in 
+// Statuses colors to reflect whatever is in
 // assets/javascripts/helpers/Metadata.coffee
 $queued:                            $color_grey_light;
 $pending_allocation:                $color_grey;
@@ -140,7 +140,7 @@ $left-menu-background-focus:        darken($left-menu-background-active, 30%);
 
 // Page
 $page-header-background:            $main_color;
-$page-header-height:                44px;
+$page-header-height:                0px;
 $page-header-font-size:             18px;
 $page-header-color:                 #fff;
 $page-header-padding:               0 5px;

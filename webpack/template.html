@@ -15,13 +15,21 @@
     <!--<link rel="icon" type="image/png" sizes="512x512" href="512.png">-->
     <!--<link rel="apple-touch-icon" type="image/png" sizes="512x512" href="512.png">-->
 
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=<YOUR-KEYS>&libraries=places"></script>
+
     <% if (process.env.NODE_ENV === "production"){ %>
-        <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css" />
     <% } %>
 
+    <% if (process.env.NODE_ENV !== "production"){ %>
+    <!--<script src="mock.js"></script>-->
     <script>
-
+      window.userId = '00528000002Se3bAAC';
+      window.jobId = 'a0EO000000IbiLKMAZ'.substr(0, 15);
     </script>
+    <% } %>
+
 </head>
 <body>
 <noscript>

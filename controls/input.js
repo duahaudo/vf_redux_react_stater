@@ -22,7 +22,7 @@ export class Textbox extends React.Component {
       value: !!props.value ? props.value : '',
       type: props.type || 'text',
       dirty: false
-    }
+    };
   }
 
   render() {
@@ -32,9 +32,12 @@ export class Textbox extends React.Component {
     return (
       <div className="form-group-container__col">
         <label
-          className={`form-group-label ${this.props.required ? "form-element__header--required" : ""}`}>{this.props.caption}</label>
-        <input className={`form-control ${!isValid ? "input-error" : ''}`} type={this.state.type}
+          className={`form-group-label`}>{this.props.caption} {this.props.required && <span aria-hidden="true" className="form-element__header--required"/>}</label>
+        <input className={`form-control ${!isValid ? "input-error" : ''} ${this.props.disabled ? 'disabled' : ''}`}
+							 disabled={this.props.disabled} type={this.state.type} ref={this.props.inputRef}
                maxLength={this.props.maxLength} placeholder={this.props.placeholder || ""} value={this.state.value}
+							 onFocus={() => this.props.onFocus ? this.props.onFocus() : {}}
+							 onBlur={() => this.props.onBlur ? this.props.onBlur() : {}}
                onChange={(evt) => this.inputHandler(evt)}/>
         {requiredError && <div className="error-message">This field is required.</div>}
       </div>
@@ -203,16 +206,16 @@ export class Select extends React.Component {
       }
       return item;
     });
+    const {keyName} = this.props;
 
     return (
       <div className="form-group-container__col">
-        <label
-          className={`form-group-label ${this.props.required ? "form-element__header--required" : ""}`}>{this.props.caption}</label>
+        {this.props.caption && <label className={`form-group-label`}>{this.props.caption}{this.props.required && <span aria-hidden="true" className="form-element__header--required"/>}</label>}
         <div className={`select ${!!this.state.value ? "" : "select--empty"}`}>
-          <select className={`form-control ${!isValid ? "input-error" : ''}`} value={this.state.value}
+          <select className={`form-control ${!isValid ? "input-error" : ''}  ${this.props.disabled ? 'disabled' : ''}`} value={this.state.value} disabled={this.props.disabled}
                   onChange={(evt) => this.onChangeHandler(evt)}>
             <option value="">{this.props.placeholder}</option>
-            {options.map(item => <option key={item.value} value={item.value}>{item.label}</option>)}
+            {options.map((item, idx) => <option key={idx} value={item[keyName || "value"]}>{item.label}</option>)}
           </select>
           {requiredError && <div className="error-message">This field is required.</div>}
         </div>
@@ -475,4 +478,122 @@ export class ImageUpload extends React.Component {
       value: !!props.value
     });
   }
+}
+
+export class Select2 extends React.Component{
+	render() {
+		const requiredError = this.props.required && (this.state.dirty === true || this.props.dirty === true) && !this.state.value;
+		const isValid = !requiredError;
+		const term = this.state.value && this.state.value.toLowerCase();
+		const options = this.state.options;
+
+		return (
+			<div className="form-group-container__col sked-autocomplete">
+				<Textbox caption={this.props.caption} value={this.state.value} required={this.props.required}
+                 placeholder={this.props.placeholder !== undefined ? this.props.placeholder : "Select"}
+                 onChange={(val) => this.onSearchChangedHandler(val)} inputRef={this.props.inputRef}
+								 onFocus={() => this.setState({
+									 value: ''
+								 })
+								 }
+								 onBlur={() => setTimeout(this.setState({
+									 value: this.props.value || '',
+									 showOptions: false,
+									 options: []
+								 }), 700)}
+        />
+
+				{this.state.showOptions && <div className="option-list-groups">
+					<div className="option-list-group">
+						{this.state.showLoading && <div className="option-list-group">
+							<div className="option-list scroll">
+								<div className="loading-throb sk-loading">
+									<div className="bounce1"/>
+									<div className="bounce2"/>
+									<div className="bounce3"/>
+								</div>
+							</div>
+						</div>}
+						<div className="option-list scroll">
+							{options.map((option, idx) => <div key={idx} className={`option-list-item ${this.state.value === option.value && 'highlighted'}`}>
+								<div className="ellipsis" onMouseDown={(event) => {
+									this.onChangeHandler(option)
+								}}>{option.label}</div>
+							</div>)}
+						</div>
+					</div>
+
+				</div>}
+
+				<div className={`ski ski-chevron ${this.state.showOptions && 'up'}`} onClick={() => this.setState({
+					value: !this.state.showOptions ? '' : this.props.value,
+					showOptions: !this.state.showOptions
+				})}/>
+      </div>
+    );
+	}
+
+	constructor(props) {
+		super(props);
+		this.state = {
+			value: !!props.value ? props.value : '',
+			options: [],
+			dirty: false,
+			showOptions: false,
+			showLoading: false
+		}
+	}
+
+	componentDidMount() {
+		this.searchUpdateHandler = _.debounce(this.searchUpdateHandler, 500);
+	}
+
+	async searchUpdateHandler(term) {
+		const result = await this.props.retrieveFn(term);
+		// console.log(result)
+		this.setState({
+			options: result.map(item => ({
+				value: item.id || item.Id,
+				label: item.name || item.Name || item.label,
+				data: {...item}
+			})),
+
+			showLoading: false
+		});
+	};
+
+	async onSearchChangedHandler(value) {
+		this.setState({
+			value,
+			showLoading: true,
+			showOptions: true,
+			options: []
+		});
+
+		this.searchUpdateHandler(value)
+	}
+
+	onChangeHandler(item) {
+		this.setState({
+			value: item.label,
+			dirty: true,
+			showOptions: false,
+			showLoading: false,
+			options: []
+		});
+
+		if (this.props.onValueChanged) {
+			this.props.onValueChanged(item.data)
+		}
+	}
+
+	componentWillReceiveProps(props) {
+		this.setState({
+			value: props.value !== undefined ? props.value : '',
+			dirty: props.dirty,
+			showOptions: false,
+			showLoading: false,
+			term: ''
+		});
+	}
 }

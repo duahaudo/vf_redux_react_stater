@@ -14,15 +14,9 @@ export const setView = (view) => dispatch => {
   })
 };
 
-export const setSelectedItem = (item) => dispatch => {
+export const setLoading = (show) => dispatch => {
   dispatch({
-    type: constant.ACTION_SET_SELECTED_ITEM,
-    item
-  })
-};
-
-export const saveDataToSf= () => dispatch => {
-  dispatch({
-    type: constant.ACTION_SAVE_DATA_TO_SALESFORCE
+    type: constant.ACTION_SHOW_LOADING,
+    show
   })
 };

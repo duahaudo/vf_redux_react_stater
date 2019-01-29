@@ -1,90 +1,87 @@
 const { resolve } = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-// const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const PreloadWebpackPlugin = require('preload-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
-  entry: [
-    'webpack-dev-server/client',
-    'webpack/hot/only-dev-server',
-    resolve(__dirname, 'hotReload'),
-  ],
-  output: {
-    filename: 'bundle.js',
-    path: resolve(__dirname),
-    publicPath: '/',
+  entry: {
+    main: resolve(__dirname, '../src'),
+    vendor: [
+      'react',
+      'react-dom',
+      'react-redux',
+      'react-router-dom',
+      'redux',
+      'redux-thunk',
+      'emotion',
+    ],
   },
-  context: resolve(__dirname, '../src'),
-  devtool: 'inline-source-map',
-  devServer: {
-    hot: true,
-    host: '0.0.0.0',
-    contentBase: resolve(__dirname, '../assets'),
-    publicPath: '/',
-    historyApiFallback: true,
+  output: {
+    // filename: '[name].[chunkhash].js',
+    filename: '[name].js',
+    //path: resolve(__dirname, '../dist'),
+    path: '/Users/stiger/Projects/salesforces/va/src/staticresources/skedFollowUpAppointment.resource/dist',
+    publicPath: '',
   },
   module: {
     rules: [
-			// Javascript and jsx assets
-			{
-				test: /\.js$/,
-				exclude: /node_modules/,
-				loader: "babel-loader"
-			}, {
-				test: /\.jsx?$/,
-				exclude: /node_modules/,
-				loader: "babel-loader"
-			},
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: "babel-loader"
+      }, {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: "babel-loader"
+      },
       {
         test: /\.css$/,
-        loader: 'style-loader!css-loader',
-				// loader: ExtractTextPlugin.extract("css")
+        // loader: 'style-loader!css-loader',
+        loader: ExtractTextPlugin.extract("css")
       },
-			{
-				test: /\.scss$/,
-				loaders: [
-					'style-loader',
-					'css-loader?-minimize',
-					'sass-loader?outputStyle=compressed'
-				]
-				// loader: ExtractTextPlugin.extract({
-				// 	fallback: 'style-loader',
-				// 	use: ['css-loader?-minimize', 'sass-loader?outputStyle=compressed']
-				// })
-			},
-      // {
-      //   test: /\.scss$/,
-      //   use: [
-      //     {
-      //       loader: 'style-loader', // creates style nodes from JS strings
-      //     },
-      //     {
-      //       loader: 'css-loader', // translates CSS into CommonJS
-      //     },
-      //     {
-      //       loader: 'sass-loader', // compiles Sass to CSS
-      //     },
-      //   ],
-      // },
+      {
+        test: /\.scss$/,
+        // loaders: [
+        // 	'style-loader',
+        // 	'css-loader?-minimize',
+        // 	'sass-loader?outputStyle=compressed'
+        // ]
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader?-minimize', 'sass-loader?outputStyle=compressed']
+        })
+      },
       {
         test: /\.(eot|svg|ttf|woff|woff2)$/,
         loader: 'file-loader?name=public/fonts/[name].[ext]',
       },
-			// Handling image assets
-			{ test: /(\.png|\.gif|\.jpg|\.jpeg)$/, loaders: ['url-loader'] },
+      { test: /(\.png|\.gif|\.jpg|\.jpeg)$/, loaders: ['url-loader?name=public/images/[name].[ext]'] },
     ],
   },
   plugins: [
-		// new ExtractTextPlugin("styles.css"),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin(),
+    new Dotenv(),
+    new ExtractTextPlugin("styles.css"),
+    new webpack.optimize.ModuleConcatenationPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production'),
+      },
+    }),
+    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.optimize.CommonsChunkPlugin({
+      names: ['vendor', 'manifest'],
+    }),
     new HtmlWebpackPlugin({
+      filename: 'index.html',
       title: 'VF React-Redux Stater',
-      template: '../webpack/template.html',
-			meta: {
-      	viewport: 'width=device-width, initial-scale=1'
-			}
+      template: 'webpack/template.html',
+    }),
+    new PreloadWebpackPlugin({
+      rel: 'preload',
+      as: 'script',
+      include: 'all',
     }),
   ],
-  performance: { hints: false },
 }
