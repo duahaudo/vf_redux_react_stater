@@ -5,6 +5,14 @@ import thunk from "redux-thunk";
 
 import reducers from "./reducers";
 
-const middleware = applyMiddleware(promise(), thunk, createLogger());
+const logger = createLogger();
+
+let middlewares = [promise(), thunk];
+
+if (location.hostname === 'localhost') {
+  middlewares.push(logger)
+}
+
+const middleware = applyMiddleware(...middlewares);
 
 export default createStore(reducers, middleware);
