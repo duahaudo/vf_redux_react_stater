@@ -5,11 +5,15 @@ import thunk from "redux-thunk";
 
 import reducers from "./reducers";
 
-const logger = createLogger();
+const logger = createLogger({
+  level: 'info',
+  collapsed: true,
+  diff: true
+});
 
 let middlewares = [promise(), thunk];
 
-if (location.hostname === 'localhost') {
+if (process.env.NODE_ENV !== "production") {
   middlewares.push(logger)
 }
 
