@@ -12,7 +12,9 @@ import {
   Text,
   Textarea,
   Textbox,
-  Toggle
+  Toggle,
+  DateTimeSelect,
+  AddressAutoComplete
 } from "../../controls";
 
 import {VIEW_DETAIL} from './duck/type'
@@ -31,11 +33,13 @@ export default class Page1 extends React.Component {
       counter2: 1,
       begin: 50,
       end: 100,
-      end2: 20
+      end2: 20,
+      Start: null
     }
   }
 
   render() {
+
     return (
       <div className={"content-section"}>
         <div className={this.state.view === this.const.view_showPopUp ? " blur_bg " : ""}>
@@ -49,6 +53,15 @@ export default class Page1 extends React.Component {
                    onChange={val => this.setState({lastName: val})}/>
           <Textbox caption={"Birthday"} type="date" value={this.state.birthday} placeholder={"Enter your birthday"}
                    onChange={val => this.setState({birthday: val})}/>
+          <AddressAutoComplete caption={"Location"} value={this.state.Address}
+                  types={['address', 'establishment']}
+                  onAddressSelected={(location) => {
+                    const {formatted_address, geometry} = location;
+                    const {lat, lng} = geometry.location;
+                    console.log(lat(), lng());
+                    this.setState({Address: formatted_address})
+                  }}/>
+          <DateTimeSelect value={this.state.Start} required={true} onChange={val => this.setState('Start',  val)} />
           <Select caption={"Gender"} value={this.state.gender} options={["Male", "Female"]}
                   placeholder={"Select Gender"}
                   onChange={val => this.setState({gender: val})}/>

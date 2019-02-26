@@ -154,7 +154,7 @@ export class DateTimeSelect extends React.Component {
 
 		// console.log(month, day, year, hour, minute, am)
 
-		return <div>
+		return <div className="form-group-container__col">
 			<div className="col-12 rm-pad-r ">
 				<div className="form-group-container__col">
 					<label className={`form-group-label`}>Start Date {this.props.required && <span aria-hidden="true" className="form-element__header--required"/>}</label>
@@ -173,7 +173,7 @@ export class DateTimeSelect extends React.Component {
 					</div>
 				</div>
 			</div>
-			<div className="col-12 ">
+			<div className="col-12  rm-pad-r ">
 				<div className="form-group-container__col">
 					<label className={`form-group-label`}>Start Time {this.props.required && <span aria-hidden="true" className="form-element__header--required"/>}</label>
 
@@ -191,6 +191,7 @@ export class DateTimeSelect extends React.Component {
 					</div>
 				</div>
 			</div>
+      <div className="clearfix"/>
 		</div>
 	};
 
@@ -207,7 +208,6 @@ export class DateTimeSelect extends React.Component {
 	  // console.log(props)
     const datetime = getTimeValue(props.value, props.timezone);
 	  const {months, hours, minutes} = this.const;
-
 
 	  return {
 			month: months[datetime.month()],
@@ -233,7 +233,11 @@ export class DateTimeSelect extends React.Component {
 
 	setDateTimeValue(val) {
 		this.setState({...val, init: false});
-		this.onChangeHandler(val);
+		if (this.state.init) {
+		  this.forceUpdate(() => this.onChangeHandler(val));
+    } else {
+      this.onChangeHandler(val);
+    }
 	}
 
 	onChangeHandler(val) {

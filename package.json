@@ -44,7 +44,7 @@
     "react-addons-css-transition-group": "^15.6.2",
     "react-test-renderer": "^16.0.0",
     "redux-logger": "^3.0.6",
-    "serve": "^6.0.2",
+    "serve": "^7.0.0",
     "webpack": "^3.1.0",
     "webpack-dev-server": "^2.5.1"
   },

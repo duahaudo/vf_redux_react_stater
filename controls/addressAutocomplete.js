@@ -11,9 +11,7 @@ export class AddressAutoComplete extends React.Component{
 
 		this.gmap_canvas = React.createRef();
 
-		// this.service = new google.maps.places.AutocompleteService({
-		// 	types: props.types
-		// });
+    this.service = new google.maps.places.AutocompleteService(this.getConfig(props) );
 	}
 
 	getConfig(props = this.props) {
