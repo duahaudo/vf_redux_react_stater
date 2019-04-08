@@ -490,6 +490,7 @@ export class Select2 extends React.Component{
 		return (
 			<div className="form-group-container__col sked-autocomplete">
 				<Textbox caption={this.props.caption} value={this.state.value} required={this.props.required}
+                 disabled={this.props.disabled}
                  placeholder={this.props.placeholder !== undefined ? this.props.placeholder : "Select"}
                  onChange={(val) => this.onSearchChangedHandler(val)} inputRef={this.props.inputRef}
 								 onFocus={() => this.setState({
